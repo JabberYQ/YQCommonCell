@@ -1,6 +1,6 @@
 //
 //  YQCommonCellItem.m
-//  ZZDCDemo
+//  YQCommonCell
 //
 //  Created by 俞琦 on 2017/8/28.
 //  Copyright © 2017年 俞琦. All rights reserved.
@@ -28,13 +28,16 @@
     item.arrow = arrow;
     item.screenSeparator = screenSeparator;
     
-    /* 默认数据 */
+    /* 默认设置 */
+    item.cellBackgroudColor = [UIColor whiteColor];
     item.titleLableFont = [UIFont boldSystemFontOfSize:16];
     item.titleLableColor = [UIColor blackColor];
     item.assistLabelFont = [UIFont systemFontOfSize:15];
     item.assistLabelColor = [UIColor grayColor];
     item.assistImageWidth = 30.f;
-    
+    item.selectAbility = YES;
+    item.selectHighlight = YES;
+    item.assistCustomViewLayout = YQAssistCustomViewLayoutRight;
     return item;
 }
 

@@ -1,6 +1,6 @@
 //
 //  YQCommonCellItem.h
-//  ZZDCDemo
+//  YQCommonCell
 //
 //  Created by 俞琦 on 2017/8/28.
 //  Copyright © 2017年 俞琦. All rights reserved.
@@ -9,9 +9,24 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
+{
+    YQAssistCustomViewLayoutRight = 0,
+    YQAssistCustomViewLayoutRightBottom = 1,
+    YQAssistCustomViewLayoutBottom = 2,
+    YQAssistCustomViewLayoutLeftBottom = 3,
+    YQAssistCustomViewLayoutLeft = 4,
+    YQAssistCustomViewLayoutLeftTop = 5,
+    YQAssistCustomViewLayoutTop = 6,
+    YQAssistCustomViewLayoutRightTop = 7,
+    YQAssistCustomViewLayoutCenter = 8,
+};
+
+
 @interface YQCommonItem : NSObject
 
 /************************************ cell 数据源 *************************************/
+
 /** 图标 */
 @property (nonatomic, copy) NSString *icon;
 /** 标题 */
@@ -31,8 +46,18 @@
 @property (nonatomic, copy) NSString *assistFieldText;
 /** 辅助textField 的 placeholder */
 @property (nonatomic, copy) NSString *assistFieldPlaceholderText;
+/** 辅助自定义视图 */
+@property (nonatomic, strong) UIView *assistCustomView;
 /** 右边显示的数字标记 */
 @property (nonatomic, copy) NSString *badgeValue;
+
+
+/************************************ cell 点击响应设置 *************************************/
+
+/** cell能否被点击 默认YES */
+@property (nonatomic, assign, getter=isSelectAbility) BOOL selectAbility;
+/** cell被点击是否高亮 默认YES */
+@property (nonatomic, assign, getter=isSelectHighlight) BOOL selectHighlight;
 /** block 只能用 copy */
 @property (nonatomic, copy) void (^operation)(void);
 /** 点击这行cell需要跳转到哪个控制器 */
@@ -46,6 +71,8 @@
 @property (nonatomic, assign) CGFloat assistImageWidth;
 /** 辅助图像圆角化 默认不处理 */
 @property (nonatomic, assign) CGFloat assistImageCornerRadius;
+/** cell背景颜色 默认白色 */
+@property (nonatomic, strong) UIColor *cellBackgroudColor;
 /** 标题字体大小 默认16 */
 @property (nonatomic, strong) UIFont *titleLableFont;
 /** 标题颜色 默认黑色 */
@@ -54,7 +81,8 @@
 @property (nonatomic, strong) UIFont *assistLabelFont;
 /** 辅助颜色 默认grayColor */
 @property (nonatomic, strong) UIColor *assistLabelColor;
-
+/** 辅助自定义视图的位置 默认靠右  */
+@property (nonatomic, assign) YQAssistCustomViewLayout assistCustomViewLayout;
 
 /**
  初始化一个item

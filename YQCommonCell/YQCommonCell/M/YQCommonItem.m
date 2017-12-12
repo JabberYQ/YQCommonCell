@@ -27,19 +27,24 @@
     item.icon = icon;
     item.arrow = arrow;
     item.screenSeparator = screenSeparator;
-    
-    /* 默认设置 */
-    item.cellBackgroudColor = [UIColor whiteColor];
-    item.titleLableFont = [UIFont boldSystemFontOfSize:16];
-    item.titleLableColor = [UIColor blackColor];
-    item.assistLabelFont = [UIFont systemFontOfSize:15];
-    item.assistLabelColor = [UIColor grayColor];
-    item.assistImageWidth = 30.f;
-    item.selectAbility = YES;
-    item.selectHighlight = YES;
-    item.assistCustomViewLayout = YQAssistCustomViewLayoutRight;
     return item;
 }
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        /* 默认设置 */
+        self.cellHeight = 44.f;
+        self.cellBackgroudColor = [UIColor whiteColor];
+        self.titleLableFont = [UIFont boldSystemFontOfSize:16];
+        self.titleLableColor = [UIColor blackColor];
+        self.assistLabelFont = [UIFont systemFontOfSize:15];
+        self.assistImageWidth = 30.f;
+        self.selectAbility = YES;
+        self.selectHighlight = YES;
+        self.assistCustomViewLayout = YQAssistCustomViewLayoutRight;
+    }
+    return self;
+}
 
 @end

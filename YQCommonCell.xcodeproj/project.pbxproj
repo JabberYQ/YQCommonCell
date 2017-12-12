@@ -33,7 +33,8 @@
 		F33C59CE1FD7DF4900F00BE5 /* YQCommonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F33C59B91FD7DF4900F00BE5 /* YQCommonItem.m */; };
 		F33C59CF1FD7DF4900F00BE5 /* YQBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F33C59BC1FD7DF4900F00BE5 /* YQBadgeView.m */; };
 		F33C59D01FD7DF4900F00BE5 /* YQCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F33C59BE1FD7DF4900F00BE5 /* YQCommonCell.m */; };
-		F33C59D21FD7DF9B00F00BE5 /* YQ_image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F33C59D11FD7DF9B00F00BE5 /* YQ_image.xcassets */; };
+		F33C59D61FDA215D00F00BE5 /* YQ_image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F33C59D51FDA215D00F00BE5 /* YQ_image.xcassets */; };
+		F33C59D91FDA219100F00BE5 /* YQCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F33C59D81FDA219100F00BE5 /* YQCommonViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,7 +108,9 @@
 		F33C59BC1FD7DF4900F00BE5 /* YQBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQBadgeView.m; sourceTree = "<group>"; };
 		F33C59BD1FD7DF4900F00BE5 /* YQCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQCommonCell.h; sourceTree = "<group>"; };
 		F33C59BE1FD7DF4900F00BE5 /* YQCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQCommonCell.m; sourceTree = "<group>"; };
-		F33C59D11FD7DF9B00F00BE5 /* YQ_image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YQ_image.xcassets; sourceTree = "<group>"; };
+		F33C59D51FDA215D00F00BE5 /* YQ_image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = YQ_image.xcassets; sourceTree = "<group>"; };
+		F33C59D71FDA219100F00BE5 /* YQCommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YQCommonViewController.h; sourceTree = "<group>"; };
+		F33C59D81FDA219100F00BE5 /* YQCommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YQCommonViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,9 +233,10 @@
 		F33C59B41FD7DF4900F00BE5 /* YQCommonCell */ = {
 			isa = PBXGroup;
 			children = (
+				F33C59D31FDA215D00F00BE5 /* C */,
 				F33C59B51FD7DF4900F00BE5 /* M */,
 				F33C59BA1FD7DF4900F00BE5 /* V */,
-				F33C59D11FD7DF9B00F00BE5 /* YQ_image.xcassets */,
+				F33C59D41FDA215D00F00BE5 /* R */,
 			);
 			path = YQCommonCell;
 			sourceTree = "<group>";
@@ -257,6 +261,23 @@
 				F33C59BE1FD7DF4900F00BE5 /* YQCommonCell.m */,
 			);
 			path = V;
+			sourceTree = "<group>";
+		};
+		F33C59D31FDA215D00F00BE5 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				F33C59D71FDA219100F00BE5 /* YQCommonViewController.h */,
+				F33C59D81FDA219100F00BE5 /* YQCommonViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		F33C59D41FDA215D00F00BE5 /* R */ = {
+			isa = PBXGroup;
+			children = (
+				F33C59D51FDA215D00F00BE5 /* YQ_image.xcassets */,
+			);
+			path = R;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,8 +387,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F33C59711FD7DF3700F00BE5 /* LaunchScreen.storyboard in Resources */,
+				F33C59D61FDA215D00F00BE5 /* YQ_image.xcassets in Resources */,
 				F33C596E1FD7DF3700F00BE5 /* Assets.xcassets in Resources */,
-				F33C59D21FD7DF9B00F00BE5 /* YQ_image.xcassets in Resources */,
 				F33C596C1FD7DF3700F00BE5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +434,7 @@
 				F33C59C91FD7DF4900F00BE5 /* UIImage+MultiFormat.m in Sources */,
 				F33C59C61FD7DF4900F00BE5 /* SDWebImagePrefetcher.m in Sources */,
 				F33C59661FD7DF3700F00BE5 /* AppDelegate.m in Sources */,
+				F33C59D91FDA219100F00BE5 /* YQCommonViewController.m in Sources */,
 				F33C59C01FD7DF4900F00BE5 /* SDImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

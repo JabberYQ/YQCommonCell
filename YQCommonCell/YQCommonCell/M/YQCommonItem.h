@@ -65,6 +65,8 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 
 /************************************ cell 内部控件配置 *************************************/
 
+/** cell行高 默认44 */
+@property (nonatomic, assign) CGFloat cellHeight;
 /** 图标大小 默认系统大小 */
 @property (nonatomic, assign) CGFloat iconWidth;
 /** 辅助图像大小 默认30 */

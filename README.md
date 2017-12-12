@@ -304,5 +304,77 @@ item5.operation = ^{
 /** cell被点击是否高亮 默认YES */
 @property (nonatomic, assign, getter=isSelectHighlight) BOOL selectHighlight;
 ```
+# 更新 添加了父类控制器等（17.12.12）
+### 更新内容一：添加了父类控制器
+添加了父类控制器：``YQCommonViewController``。
+![YQCommonViewController声明.png](http://upload-images.jianshu.io/upload_images/2312304-68e7b3cdd0032b0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+当需要创建表单视图时，创建一个继承``YQCommonViewController``的控制器，设置``commonGroups ``属性，刷新`` commonTableView``即可。
+
+### 更新内容二：可自定义表单的头视图和尾视图
+添加了``YQCommonGroup``的部分属性：
+```
+typedef NS_ENUM(NSInteger, YQHeaderTitleLayout)
+{
+    YQHeaderTitleLayoutLeft = 0,
+    YQHeaderTitleLayoutCenter = 1,
+    YQHeaderTitleLayoutRight = 2,
+};
+
+typedef NS_ENUM(NSInteger, YQFooterTitleLayout)
+{
+    YQFooterTitleLayoutLeft = 0,
+    YQFooterTitleLayoutCenter = 1,
+    YQFooterTitleLayoutRight = 2,
+};
+
+
+@interface YQCommonGroup : NSObject
+/** 每个Section内部内容 */
+@property (nonatomic, strong) NSArray *items;
+
+/** Section Header高 默认40 如果设置了Header标题或者HeaderView自定义，该属性无效，以试图的高为准*/
+@property (nonatomic, assign) CGFloat headerHeight;
+/** Section Header标题 */
+@property (nonatomic, copy) NSString *headerTitle;
+/** Section Header标题颜色 默认灰色*/
+@property (nonatomic, strong) UIColor *headerTitleColor;
+/** Section Header标题大小 默认16*/
+@property (nonatomic, strong) UIFont *headerTitleFont;
+/** Section Header标题高度 默认50*/
+@property (nonatomic, assign) CGFloat headerTitleHeight;
+/** Section Header标题位置 默认居左*/
+@property (nonatomic, assign) YQHeaderTitleLayout headerTitleLayout;
+/** Section HeaderView自定义 */
+@property (nonatomic, strong) UIView *headerView;
+
+/** Section Footer高 默认0.01 如果设置了Footer标题或者FooterView自定义，该属性无效，以试图的高为准*/
+@property (nonatomic, assign) CGFloat footerHeight;
+/** Section Footer标题 */
+@property (nonatomic, copy) NSString *footerTitle;
+/** Section Footer标题颜色 默认灰色*/
+@property (nonatomic, strong) UIColor *footerTitleColor;
+/** Section Footer标题大小 默认16*/
+@property (nonatomic, strong) UIFont *footerTitleFont;
+/** Section Footer标题高度 默认50*/
+@property (nonatomic, assign) CGFloat footerTitleHeight;
+/** Section Footer标题位置 默认居左*/
+@property (nonatomic, assign) YQFooterTitleLayout footerTitleLayout;
+/** Section FooterView */
+@property (nonatomic, strong) UIView *footerView;
+```
+使用：
+![使用1.png](http://upload-images.jianshu.io/upload_images/2312304-0bdd0d5014cb2827.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![效果1.png](http://upload-images.jianshu.io/upload_images/2312304-d1609958606c3dd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![使用2.png](http://upload-images.jianshu.io/upload_images/2312304-1623997e95e3ffad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![效果2.png](http://upload-images.jianshu.io/upload_images/2312304-b194078bd4edfbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![使用3.png](http://upload-images.jianshu.io/upload_images/2312304-34beabfab97356f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![效果3.png](http://upload-images.jianshu.io/upload_images/2312304-1922eba162a6ec39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 # 简书地址
 http://www.jianshu.com/p/e946ee333ccd

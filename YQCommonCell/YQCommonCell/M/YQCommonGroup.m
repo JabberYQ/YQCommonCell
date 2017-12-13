@@ -7,11 +7,13 @@
 //
 
 #import "YQCommonGroup.h"
+#import "YQCommonItem.h"
 
 @implementation YQCommonGroup
 {
     UILabel *_headerLabel;
     UILabel *_footerLabel;
+    BOOL _isLastItemHadBottomLine; // 暂存
 }
 + (instancetype)groupWithItems:(NSArray *)items
 {
@@ -33,10 +35,31 @@
         self.footerTitleColor = [UIColor grayColor];
         self.footerTitleHeight = 50.f;
         self.footerTitleLayout = YQFooterTitleLayoutLeft;
+        self.hiddenLastRowBottomLine = YES;
     }
     return self;
 }
 
+- (void)setItems:(NSArray *)items
+{
+    _items = items;
+    
+    if (self.hiddenLastRowBottomLine) {
+        YQCommonItem *lastItem = [items lastObject];
+        _isLastItemHadBottomLine = lastItem.hadBottomLine;
+        lastItem.hadBottomLine = NO;
+    }
+    
+}
+
+- (void)setHiddenLastRowBottomLine:(BOOL)hiddenLastRowBottomLine
+{
+    _hiddenLastRowBottomLine = hiddenLastRowBottomLine;
+    if (hiddenLastRowBottomLine == NO && self.items) { // 不需要隐藏最后一行的分割线
+        YQCommonItem *lastItem = [self.items lastObject];
+        lastItem.hadBottomLine = _isLastItemHadBottomLine;
+    }
+}
 
 /** Header */
 - (void)setHeaderTitle:(NSString *)headerTitle

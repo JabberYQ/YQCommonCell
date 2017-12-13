@@ -27,6 +27,8 @@ typedef NS_ENUM(NSInteger, YQFooterTitleLayout)
 @interface YQCommonGroup : NSObject
 /** 每个Section内部内容 */
 @property (nonatomic, strong) NSArray *items;
+/** Section最后一行row隐藏分割线 默认开启*/
+@property (nonatomic, assign) BOOL hiddenLastRowBottomLine;
 
 /** Section Header高 默认40 如果设置了Header标题或者HeaderView自定义，该属性无效，以试图的高为准*/
 @property (nonatomic, assign) CGFloat headerHeight;

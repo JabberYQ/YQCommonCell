@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 @property (nonatomic, strong) UITextField *assistTextField; ///< 辅助UITextField
 @property (nonatomic, strong) UIView *assistCustomView; ///< 辅助自定义视图
 @property (nonatomic, strong) YQBadgeView *badgeView; ///< 提醒按钮
+@property (nonatomic, strong) UIView *bottomLine; ///<分割线
 
 @property (nonatomic, assign) YQCommonCellAssistType assistType;
 @end
@@ -51,10 +52,11 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.assistCustomView];
-        [self addSubview:self.assistImageView];
-        [self addSubview:self.assistLabel];
-        [self addSubview:self.assistTextFile];
-        [self addSubview:self.badgeView];
+        [self.contentView addSubview:self.assistImageView];
+        [self.contentView addSubview:self.assistLabel];
+        [self.contentView addSubview:self.assistTextFile];
+        [self.contentView addSubview:self.badgeView];
+        [self.contentView addSubview:self.bottomLine];
     }
     return self;
 }
@@ -71,6 +73,12 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     CGFloat assistRightToCell = self.item.isArrow ? 40.f : 15.f;
     CGFloat badgeRight = 0.f;
     CGFloat assistImageWidth = self.item.assistImageWidth;
+    
+    // 设置分割线
+    if (!self.bottomLine.hidden) {
+        CGFloat bottomLineX = self.item.bottomLineX < 0 ? self.textLabel.frame.origin.x : self.item.bottomLineX;
+        self.bottomLine.frame = CGRectMake(bottomLineX, cellHeight - self.item.bottomLineHeight, cellWidth - bottomLineX, self.item.bottomLineHeight);
+    }
     
     // 设置小红点
     if (!self.badgeView.hidden) {
@@ -235,9 +243,10 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 
 - (void)setCellStyle
 {
-    self.backgroundColor = self.item.cellBackgroudColor;
+    self.contentView.backgroundColor = self.item.cellBackgroudColor;
     self.textLabel.font = self.item.titleLableFont;
     self.textLabel.textColor = self.item.titleLableColor;
+    self.bottomLine.backgroundColor = self.item.bottomLineColor;
     self.assistLabel.font = self.item.assistLabelFont;
     self.assistLabel.textColor = self.item.assistLabelColor;
     self.assistTextField.font = self.item.assistLabelFont;
@@ -264,6 +273,12 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 {
     self.imageView.image = [UIImage imageNamed:self.item.icon];
     self.textLabel.text = self.item.title;
+    
+    if (self.item.isHadBottomLine) {
+        self.bottomLine.hidden = NO;
+    } else {
+        self.bottomLine.hidden = YES;
+    }
     
     // 设置红点提醒
     if (self.item.badgeValue && self.item.badgeValue.integerValue > 0) {
@@ -337,13 +352,13 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 }
 
 #pragma mark - setter
-- (void)setFrame:(CGRect)frame
-{
-    if (self.item.screenSeparator == YES) {
-        frame.size.height -= 1;
-    }
-    [super setFrame:frame];
-}
+//- (void)setFrame:(CGRect)frame
+//{
+//    if (self.item.screenSeparator == YES) {
+//        frame.size.height -= 1;
+//    }
+//    [super setFrame:frame];
+//}
 
 
 - (void)setItem:(YQCommonItem *)item
@@ -408,5 +423,13 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         _badgeView = [[YQBadgeView alloc] init];
     }
     return _badgeView;
+}
+
+- (UIView *)bottomLine
+{
+    if (_bottomLine == nil) {
+        _bottomLine = [[UIView alloc] init];
+    }
+    return _bottomLine;
 }
 @end

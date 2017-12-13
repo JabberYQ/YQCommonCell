@@ -33,8 +33,8 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 @property (nonatomic, copy) NSString *title;
 /** 是否有箭头 默认为NO */
 @property (nonatomic, assign, getter=isArrow) BOOL arrow;
-/** 是否有全屏的分割线 默认为NO */
-@property (nonatomic, assign, getter=isScreenSeparator) BOOL screenSeparator;
+/** 是否有分割线 默认为YES */
+@property (nonatomic, assign, getter=isHadBottomLine) BOOL hadBottomLine;
 /** 辅助图片本地Str */
 @property (nonatomic, copy) NSString *assistImageFileStr;
 /** 辅助图片网络Str */
@@ -85,6 +85,12 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 @property (nonatomic, strong) UIColor *assistLabelColor;
 /** 辅助自定义视图的位置 默认靠右  */
 @property (nonatomic, assign) YQAssistCustomViewLayout assistCustomViewLayout;
+/** 分割线颜色 默认[UIColor colorWithWhite:0.85 alpha:0.6] */
+@property (nonatomic, strong) UIColor *bottomLineColor;
+/** 分割线高度  默认1*/
+@property (nonatomic, assign) CGFloat bottomLineHeight;
+/** 分割线X 默认和cell的textlabel平齐*/
+@property (nonatomic, assign) CGFloat bottomLineX;
 
 /**
  初始化一个item
@@ -113,8 +119,8 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
  @param title 标题
  @param icon 图标
  @param arrow 是否存在跳转箭头
- @param screenSeparator 是否有全屏分割线
+ @param hadBottomLine 是否有分割线
  @return item
  */
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow screenSeparator:(BOOL)screenSeparator;
++ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow hadBottomLine:(BOOL)hadBottomLine;
 @end

@@ -16,17 +16,17 @@
 
 + (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow
 {
-    return [self itemWithTitle:title icon:icon arrow:arrow screenSeparator:NO];
+    return [self itemWithTitle:title icon:icon arrow:arrow hadBottomLine:YES];
 }
 
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow screenSeparator:(BOOL)screenSeparator
++ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow hadBottomLine:(BOOL)hadBottomLine
 {
     YQCommonItem *item = [[YQCommonItem alloc] init];
     /* 初始化数据 */
     item.title = title;
     item.icon = icon;
     item.arrow = arrow;
-    item.screenSeparator = screenSeparator;
+    item.hadBottomLine = hadBottomLine;
     return item;
 }
 
@@ -43,6 +43,9 @@
         self.selectAbility = YES;
         self.selectHighlight = YES;
         self.assistCustomViewLayout = YQAssistCustomViewLayoutRight;
+        self.bottomLineHeight = 1.0f;
+        self.bottomLineX = -1.0f;
+        self.bottomLineColor = [UIColor colorWithWhite:0.85 alpha:0.6];
     }
     return self;
 }

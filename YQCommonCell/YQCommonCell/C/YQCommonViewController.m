@@ -21,11 +21,28 @@
 {
     [super viewDidLoad];
     
-    self.commonTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.commonTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.commonTableView.dataSource = self;
     self.commonTableView.delegate = self;
     self.commonTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.commonTableView];
+    
+    
+    CGFloat StatusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat NavBarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat tableViewY;
+    if (self.navigationController && self.navigationController.navigationBar.hidden == NO) {
+        tableViewY = StatusBarHeight + NavBarHeight;
+    } else {
+        tableViewY = StatusBarHeight;
+    }
+    
+    self.commonTableView.frame = CGRectMake(0, tableViewY, self.view.bounds.size.width, self.view.bounds.size.height - tableViewY);
+    if (@available(iOS 11.0, *)) {
+        self.commonTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 #pragma mark - public

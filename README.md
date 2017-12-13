@@ -376,5 +376,65 @@ typedef NS_ENUM(NSInteger, YQFooterTitleLayout)
 
 ![效果3.png](http://upload-images.jianshu.io/upload_images/2312304-1922eba162a6ec39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+# 更新 自定义分割线（17.12.13）
+由于存在分割线的可调整性不够的问题，我添加了部分属性来自定义分割线。
+### 添加
+```
+// YQCommonItem
+/** 分割线颜色 默认[UIColor colorWithWhite:0.85 alpha:0.6] */
+@property (nonatomic, strong) UIColor *bottomLineColor;
+/** 分割线高度  默认1*/
+@property (nonatomic, assign) CGFloat bottomLineHeight;
+/** 分割线X 默认和cell的textlabel平齐*/
+@property (nonatomic, assign) CGFloat bottomLineX;
+```
+```
+// YQCommonGroup
+/** Section最后一行row隐藏分割线 默认开启*/
+@property (nonatomic, assign) BOOL hiddenLastRowBottomLine;
+```
+### 修改一
+```
+/** 是否有分割线 默认为YES */
+@property (nonatomic, assign, getter=isHadBottomLine) BOOL hadBottomLine;
+```
+```
+/**
+ 初始化一个item
+ 
+ @param title 标题
+ @param icon 图标
+ @param arrow 是否存在跳转箭头
+ @param hadBottomLine 是否有分割线
+ @return item
+ */
++ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow hadBottomLine:(BOOL)hadBottomLine;
+```
+之前版本的分割线为写死的，要么全屏，要么无分割线。
+这次版本可以自定义风格线的位置，颜色。同时，考虑到section的最后一行可能不需要分割线，因此默认将最后一行的分割线隐藏。
+
+### 修改二
+在``YQCommonViewController ``中重写了tableview的frame，会随着navbar的存在与否改变。
+```
+    CGFloat StatusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat NavBarHeight = self.navigationController.navigationBar.frame.size.height;
+    CGFloat tableViewY;
+    if (self.navigationController && self.navigationController.navigationBar.hidden == NO) {
+        tableViewY = StatusBarHeight + NavBarHeight;
+    } else {
+        tableViewY = StatusBarHeight;
+    }
+    
+    self.commonTableView.frame = CGRectMake(0, tableViewY, self.view.bounds.size.width, self.view.bounds.size.height - tableViewY);
+    if (@available(iOS 11.0, *)) {
+        self.commonTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+```
+
+### 效果：
+![效果动图.gif](http://upload-images.jianshu.io/upload_images/2312304-11dfd44388e43834.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 # 简书地址
 http://www.jianshu.com/p/e946ee333ccd

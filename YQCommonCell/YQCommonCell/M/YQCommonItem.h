@@ -25,35 +25,7 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 
 @interface YQCommonItem : NSObject
 
-/************************************ cell 数据源 *************************************/
-
-/** 图标 */
-@property (nonatomic, copy) NSString *icon;
-/** 标题 */
-@property (nonatomic, copy) NSString *title;
-/** 是否有箭头 默认为NO */
-@property (nonatomic, assign, getter=isArrow) BOOL arrow;
-/** 是否有分割线 默认为YES */
-@property (nonatomic, assign, getter=isHadBottomLine) BOOL hadBottomLine;
-/** 辅助图片本地Str */
-@property (nonatomic, copy) NSString *assistImageFileStr;
-/** 辅助图片网络Str */
-@property (nonatomic, copy) NSString *assistImageURLStr;
-/** 辅助信息 */
-@property (nonatomic, copy) NSString *assistLabelText;
-/* assistFieldText 与 assistFieldPlaceholderText 的区别在于前者为field.text属性 后者为field.placeholder属性 */
-/** 辅助textField */
-@property (nonatomic, copy) NSString *assistFieldText;
-/** 辅助textField 的 placeholder */
-@property (nonatomic, copy) NSString *assistFieldPlaceholderText;
-/** 辅助自定义视图 */
-@property (nonatomic, strong) UIView *assistCustomView;
-/** 右边显示的数字标记 */
-@property (nonatomic, copy) NSString *badgeValue;
-
-
-/************************************ cell 点击响应设置 *************************************/
-
+/************************************ cell 对应属性 *************************************/
 /** cell能否被点击 默认YES */
 @property (nonatomic, assign, getter=isSelectAbility) BOOL selectAbility;
 /** cell被点击是否高亮 默认YES */
@@ -62,29 +34,67 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 @property (nonatomic, copy) void (^operation)(void);
 /** 点击这行cell需要跳转到哪个控制器 */
 @property (nonatomic, assign) Class destVcClass;
-
-/************************************ cell 内部控件配置 *************************************/
-
 /** cell行高 默认44 */
 @property (nonatomic, assign) CGFloat cellHeight;
+/** cell背景颜色 默认白色 */
+@property (nonatomic, strong) UIColor *cellBackgroudColor;
+
+/************************************ arrow 对应属性 *************************************/
+/** 是否有箭头 默认为NO */
+@property (nonatomic, assign, getter=isArrow) BOOL arrow;
+
+/************************************ icon 对应属性 *************************************/
+/** 图标 */
+@property (nonatomic, copy) NSString *icon;
 /** 图标大小 默认系统大小 */
 @property (nonatomic, assign) CGFloat iconWidth;
+
+/************************************ title 对应属性 *************************************/
+/** 标题 */
+@property (nonatomic, copy) NSString *title;
+/** 标题字体大小 默认16 */
+@property (nonatomic, strong) UIFont *titleLableFont;
+/** 标题颜色 默认MPBlueColor */
+@property (nonatomic, strong) UIColor *titleLableColor;
+
+/************************************ badge 对应属性 *************************************/
+/** title右边 数字提醒标记 */
+@property (nonatomic, copy) NSString *badgeValue;
+
+/************************ 辅助视图：assistLabel 对应属性 *************************************/
+/** 辅助信息 */
+@property (nonatomic, copy) NSString *assistLabelText;
+/** 辅助字体大小 默认15 */
+@property (nonatomic, strong) UIFont *assistLabelFont;
+/** 辅助颜色 默认MPBlueColor */
+@property (nonatomic, strong) UIColor *assistLabelColor;
+
+/************************ 辅助视图：textField 对应属性 *************************************/
+/* assistFieldText 与 assistFieldPlaceholderText 的区别在于前者为field.text属性 后者为field.placeholder属性 */
+/** 辅助textField */
+@property (nonatomic, copy) NSString *assistFieldText;
+/** 辅助textField 的 placeholder */
+@property (nonatomic, copy) NSString *assistFieldPlaceholderText;
+
+/************************ 辅助视图：imageView 对应属性 *************************************/
+/** 辅助图片本地Str */
+@property (nonatomic, copy) NSString *assistImageFileStr;
+/** 辅助图片网络Str */
+@property (nonatomic, copy) NSString *assistImageURLStr;
 /** 辅助图像大小 默认30 */
 @property (nonatomic, assign) CGFloat assistImageWidth;
 /** 辅助图像圆角化 默认不处理 */
 @property (nonatomic, assign) CGFloat assistImageCornerRadius;
-/** cell背景颜色 默认白色 */
-@property (nonatomic, strong) UIColor *cellBackgroudColor;
-/** 标题字体大小 默认16 */
-@property (nonatomic, strong) UIFont *titleLableFont;
-/** 标题颜色 默认黑色 */
-@property (nonatomic, strong) UIColor *titleLableColor;
-/** 辅助字体大小 默认15 */
-@property (nonatomic, strong) UIFont *assistLabelFont;
-/** 辅助颜色 默认grayColor */
-@property (nonatomic, strong) UIColor *assistLabelColor;
+
+/************************ 辅助视图：自定义customview 对应属性 *************************************/
+/** 辅助自定义视图 */
+@property (nonatomic, strong) UIView *assistCustomView;
 /** 辅助自定义视图的位置 默认靠右  */
 @property (nonatomic, assign) YQAssistCustomViewLayout assistCustomViewLayout;
+
+/************************************ 分割线 对应属性 *************************************/
+/** 是否有分割线 默认为YES */
+@property (nonatomic, assign, getter=isHadBottomLine) BOOL hadBottomLine;
 /** 分割线颜色 默认[UIColor colorWithWhite:0.85 alpha:0.6] */
 @property (nonatomic, strong) UIColor *bottomLineColor;
 /** 分割线高度  默认1*/

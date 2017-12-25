@@ -106,7 +106,7 @@
     YQCommonItem *item7 = [YQCommonItem itemWithTitle:@"第七行" icon:@"1" arrow:NO hadBottomLine:YES];
     UIView *v3 = [[UIView alloc] init];
     v3.backgroundColor = [UIColor blueColor];
-    v3.frame = CGRectMake(0, 0, 30, 30);
+    v3.frame = CGRectMake(0, 0, 60, 100);
     v3.layer.cornerRadius = 4;
     item7.assistCustomView = v3;
     item7.assistCustomViewLayout = YQAssistCustomViewLayoutLeft;
@@ -163,9 +163,42 @@
     group3.headerTitleFont = [UIFont systemFontOfSize:20];
     group3.footerTitle = @"group3.footerTitle";
     
+    
+    YQCommonItem *item40 = [YQCommonItem itemWithTitle:@"第四sec 第一行" icon:@"1"];
+    UILabel *item40V = [[UILabel alloc] init];
+    item40V.backgroundColor = [UIColor redColor];
+    item40V.frame = CGRectMake(0, 0, 100, 80);
+    item40V.text = @"item40V";
+    item40.assistCustomView = item40V;
+    item40.assistCustomViewLayout = YQAssistCustomViewLayoutLeft;
+    item40.assistCustomViewClipsToBounds = YES;
+    
+    YQCommonItem *item41 = [YQCommonItem itemWithTitle:@"第四sec 第二行" icon:@"1"];
+    UILabel *item41V = [[UILabel alloc] init];
+    item41V.backgroundColor = [UIColor orangeColor];
+    item41V.frame = CGRectMake(0, 0, 100, 80);
+    item41V.text = @"item41V";
+    item41.assistCustomView = item41V;
+    item41.assistCustomViewLayout = YQAssistCustomViewLayoutCenter;
+    item41.assistCustomViewClipsToBounds = NO;
+    
+    YQCommonItem *item42 = [YQCommonItem itemWithTitle:@"第四sec 第二行" icon:@"1"];
+    UILabel *item42V = [[UILabel alloc] init];
+    item42V.backgroundColor = [UIColor orangeColor];
+    item42V.frame = CGRectMake(0, 0, 100, 80);
+    item42V.text = @"item42V";
+    item42.assistCustomView = item42V;
+    item42.assistCustomViewLayout = YQAssistCustomViewLayoutRight;
+    item42.assistCustomViewClipsToBounds = NO;
+    
+    YQCommonGroup *group4 = [YQCommonGroup groupWithItems:@[item40, item41, item42]];
+
+    
+    
     [self.commonGroups addObject:group1];
     [self.commonGroups addObject:group2];
     [self.commonGroups addObject:group3];
+    [self.commonGroups addObject:group4];
     
     [self.commonTableView reloadData];
 }

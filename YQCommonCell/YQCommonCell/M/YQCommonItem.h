@@ -91,6 +91,8 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 @property (nonatomic, strong) UIView *assistCustomView;
 /** 辅助自定义视图的位置 默认靠右  */
 @property (nonatomic, assign) YQAssistCustomViewLayout assistCustomViewLayout;
+/** 辅助自定义视图 超过最大尺寸的部分 是否裁剪 默认裁剪 */
+@property (nonatomic, assign, getter=isAssistCustomViewClipsToBounds) BOOL assistCustomViewClipsToBounds;
 
 /************************************ 分割线 对应属性 *************************************/
 /** 是否有分割线 默认为YES */

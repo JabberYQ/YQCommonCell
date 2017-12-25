@@ -149,16 +149,20 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     UIView *subView = self.item.assistCustomView;
     UIView *assistCustomView = self.assistCustomView;
     
+    // cell上的
     CGFloat assistCustomViewW = assistCustomView.bounds.size.width;
     CGFloat assistCustomViewH = assistCustomView.bounds.size.height;
     
+    // 传入的
     CGFloat subViewW = subView.bounds.size.width;
     CGFloat subViewH = subView.bounds.size.height;
     
-    if (assistCustomViewW < subViewW || assistCustomViewH < subViewH) {
+    BOOL isExceedMaxSize;
+    if (assistCustomViewW < subViewW || assistCustomViewH < subViewH) { // 设置的自定义视图超过了最大的尺寸
         subView.frame = CGRectMake(0, 0, subViewW, subViewH);
-        assistCustomView.clipsToBounds = YES;
-        return;
+        isExceedMaxSize = YES;
+    } else {
+        isExceedMaxSize = NO;
     }
     
     switch (self.item.assistCustomViewLayout) {
@@ -228,6 +232,8 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         default:
             break;
     }
+    
+    assistCustomView.clipsToBounds = self.item.isAssistCustomViewClipsToBounds;
 }
 
 #pragma mark - settingInfo

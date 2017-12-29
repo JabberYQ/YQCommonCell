@@ -44,6 +44,7 @@
         self.selectHighlight = YES;
         self.assistCustomViewLayout = YQAssistCustomViewLayoutRight;
         self.assistCustomViewClipsToBounds = YES;
+        self.hadBottomLine = YES;
         self.bottomLineHeight = 1.0f;
         self.bottomLineX = -1.0f;
         self.bottomLineColor = [UIColor colorWithWhite:0.85 alpha:0.6];

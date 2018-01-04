@@ -29,7 +29,7 @@
     YQCommonItem *item1 = [YQCommonItem itemWithTitle:@"第一行" icon:@"0" arrow:YES hadBottomLine:YES];
     item1.cellHeight = 150;
     item1.assistFieldText = @"这是默认的assistFieldText";
-    item1.assistLabelFont = [UIFont systemFontOfSize:13];
+    item1.assistFieldFont = [UIFont systemFontOfSize:13];
     item1.bottomLineX = 100;
     item1.operation = ^{
         NSLog(@"第一行");

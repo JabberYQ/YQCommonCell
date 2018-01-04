@@ -62,19 +62,27 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 @property (nonatomic, copy) NSString *badgeValue;
 
 /************************ 辅助视图：assistLabel 对应属性 *************************************/
-/** 辅助信息 */
+/** 辅助LabelText */
 @property (nonatomic, copy) NSString *assistLabelText;
 /** 辅助字体大小 默认15 */
 @property (nonatomic, strong) UIFont *assistLabelFont;
-/** 辅助颜色 默认MPBlueColor */
+/** 辅助颜色 默认黑色*/
 @property (nonatomic, strong) UIColor *assistLabelColor;
+
 
 /************************ 辅助视图：textField 对应属性 *************************************/
 /* assistFieldText 与 assistFieldPlaceholderText 的区别在于前者为field.text属性 后者为field.placeholder属性 */
+
 /** 辅助textField */
 @property (nonatomic, copy) NSString *assistFieldText;
 /** 辅助textField 的 placeholder */
 @property (nonatomic, copy) NSString *assistFieldPlaceholderText;
+/** 辅助字体大小 默认15 */
+@property (nonatomic, strong) UIFont *assistFieldFont;
+/** 辅助颜色 默认黑色*/
+@property (nonatomic, strong) UIColor *assistFieldColor;
+/** textField编辑完成回调 */
+@property (nonatomic, copy) BOOL (^assistFieldDoneBlock)(NSString *assistFieldText);
 
 /************************ 辅助视图：imageView 对应属性 *************************************/
 /** 辅助图片本地Str */

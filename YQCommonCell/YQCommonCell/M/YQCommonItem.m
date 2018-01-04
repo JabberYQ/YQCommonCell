@@ -39,6 +39,9 @@
         self.titleLableFont = [UIFont boldSystemFontOfSize:16];
         self.titleLableColor = [UIColor blackColor];
         self.assistLabelFont = [UIFont systemFontOfSize:15];
+        self.assistLabelColor = [UIColor blackColor];
+        self.assistFieldFont = [UIFont systemFontOfSize:15];
+        self.assistFieldColor = [UIColor blackColor];
         self.assistImageWidth = 30.f;
         self.selectAbility = YES;
         self.selectHighlight = YES;

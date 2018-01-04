@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     YQCommonCellAssistTypeImage = 4,
 };
 
-@interface YQCommonCell()
+@interface YQCommonCell() <UITextFieldDelegate>
 @property (nonatomic, strong) UILabel *assistLabel; ///< 辅助信息lable
 @property (nonatomic, strong) UIImageView *assistImageView; ///< 辅助imageView
 @property (nonatomic, strong) UITextField *assistTextField; ///< 辅助UITextField
@@ -253,10 +253,13 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     self.textLabel.font = self.item.titleLableFont;
     self.textLabel.textColor = self.item.titleLableColor;
     self.bottomLine.backgroundColor = self.item.bottomLineColor;
+    
     self.assistLabel.font = self.item.assistLabelFont;
     self.assistLabel.textColor = self.item.assistLabelColor;
-    self.assistTextField.font = self.item.assistLabelFont;
-    self.assistTextField.textColor = self.item.assistLabelColor;
+    
+    self.assistTextField.font = self.item.assistFieldFont;
+    self.assistTextField.textColor = self.item.assistFieldColor;
+    
     if (self.item.iconWidth > 0) {
         UIImage *iconImage = self.imageView.image;
         CGSize iconSize = CGSizeMake(self.item.iconWidth, self.item.iconWidth);
@@ -357,16 +360,17 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     self.assistType = YQCommonCellAssistTypeNone;
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (self.item.assistFieldDoneBlock) {
+        return self.item.assistFieldDoneBlock(textField.text);
+    } else {
+        return YES;
+    }
+}
+
 #pragma mark - setter
-//- (void)setFrame:(CGRect)frame
-//{
-//    if (self.item.screenSeparator == YES) {
-//        frame.size.height -= 1;
-//    }
-//    [super setFrame:frame];
-//}
-
-
 - (void)setItem:(YQCommonItem *)item
 {
     _item = item;
@@ -376,11 +380,6 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     [self setCellStyle];
     
     [self setCellResponse];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    NSLog(@"%@", textField.text);
 }
 
 #pragma mark - getter
@@ -410,6 +409,8 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         _assistTextField.hidden = YES;
         _assistTextField.borderStyle = UITextBorderStyleNone;
         _assistTextField.textAlignment = NSTextAlignmentRight;
+        _assistTextField.returnKeyType = UIReturnKeyDone;
+        _assistTextField.delegate = self;
     }
     return _assistTextField;
 }

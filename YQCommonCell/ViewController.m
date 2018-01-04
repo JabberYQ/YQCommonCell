@@ -25,12 +25,19 @@
 - (void)initData
 {
 
+    __weak typeof(self) weakSelf = self;
     YQCommonItem *item1 = [YQCommonItem itemWithTitle:@"第一行" icon:@"0" arrow:YES hadBottomLine:YES];
     item1.cellHeight = 150;
-    item1.selectAbility = NO;
+    item1.assistFieldText = @"这是默认的assistFieldText";
+    item1.assistLabelFont = [UIFont systemFontOfSize:13];
     item1.bottomLineX = 100;
     item1.operation = ^{
         NSLog(@"第一行");
+    };
+    
+    item1.assistFieldDoneBlock = ^BOOL(NSString *assistFieldText) {
+        NSLog(@"%@", assistFieldText);
+        return [weakSelf.view endEditing:YES];;
     };
     
     YQCommonItem *item2 = [YQCommonItem itemWithTitle:@"第二行第二行" icon:@"1" arrow:NO hadBottomLine:YES];

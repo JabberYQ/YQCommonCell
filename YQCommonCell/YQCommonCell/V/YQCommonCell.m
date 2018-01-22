@@ -250,12 +250,16 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 - (void)setCellStyle
 {
     self.contentView.backgroundColor = self.item.cellBackgroudColor;
-    self.textLabel.font = self.item.titleLableFont;
-    self.textLabel.textColor = self.item.titleLableColor;
+    if (!self.item.attributedTitle) { // 设置标题
+        self.textLabel.font = self.item.titleLableFont;
+        self.textLabel.textColor = self.item.titleLableColor;
+    }
     self.bottomLine.backgroundColor = self.item.bottomLineColor;
     
-    self.assistLabel.font = self.item.assistLabelFont;
-    self.assistLabel.textColor = self.item.assistLabelColor;
+    if (!self.item.assistLabelAttributedText) {
+        self.assistLabel.font = self.item.assistLabelFont;
+        self.assistLabel.textColor = self.item.assistLabelColor;
+    }
     
     self.assistTextField.font = self.item.assistFieldFont;
     self.assistTextField.textColor = self.item.assistFieldColor;
@@ -269,6 +273,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
+    
     if (self.item.assistImageCornerRadius > 0) {
         self.assistImageView.layer.cornerRadius = self.item.assistImageCornerRadius;
         self.assistImageView.clipsToBounds = YES;
@@ -280,8 +285,16 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 
 - (void)setCellData
 {
+    // 图片
     self.imageView.image = [UIImage imageNamed:self.item.icon];
-    self.textLabel.text = self.item.title;
+    self.textLabel.text = nil;
+    self.textLabel.attributedText = nil;
+    // textLabel
+    if (self.item.attributedTitle) {
+        self.textLabel.attributedText = self.item.attributedTitle;
+    } else {
+        self.textLabel.text = self.item.title;
+    }
     
     if (self.item.isHadBottomLine) {
         self.bottomLine.hidden = NO;
@@ -317,9 +330,13 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     }
     
     // 辅助label
-    if (self.item.assistLabelText && self.item.assistLabelText.length > 0) {
+    if ((self.item.assistLabelText && self.item.assistLabelText.length > 0) || (self.item.assistLabelAttributedText)) {
         self.assistLabel.hidden = NO;
-        self.assistLabel.text = self.item.assistLabelText;
+        if (self.item.assistLabelAttributedText) {
+            self.assistLabel.attributedText = self.item.assistLabelAttributedText;
+        } else {
+            self.assistLabel.text = self.item.assistLabelText;
+        }
         self.assistType = YQCommonCellAssistTypeLabel;
         return;
     } else {

@@ -52,6 +52,8 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 /************************************ title 对应属性 *************************************/
 /** 标题 */
 @property (nonatomic, copy) NSString *title;
+/** 标题 attributed 如果同时设置，就使用attributedTitle*/
+@property (nonatomic, copy) NSAttributedString *attributedTitle;
 /** 标题字体大小 默认16 */
 @property (nonatomic, strong) UIFont *titleLableFont;
 /** 标题颜色 默认MPBlueColor */
@@ -64,6 +66,8 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 /************************ 辅助视图：assistLabel 对应属性 *************************************/
 /** 辅助LabelText */
 @property (nonatomic, copy) NSString *assistLabelText;
+/** 辅助Label的attributedText 如果同时设置，就使用assistLabelAttributedText*/
+@property (nonatomic, copy) NSAttributedString *assistLabelAttributedText;
 /** 辅助字体大小 默认15 */
 @property (nonatomic, strong) UIFont *assistLabelFont;
 /** 辅助颜色 默认黑色*/

@@ -27,9 +27,18 @@
 
     __weak typeof(self) weakSelf = self;
     YQCommonItem *item1 = [YQCommonItem itemWithTitle:@"第一行" icon:@"0" arrow:YES hadBottomLine:YES];
+    NSString *str = @"第一行 *";
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attrStr addAttribute:NSFontAttributeName
+                    value:[UIFont systemFontOfSize:30.0f]
+                    range:NSMakeRange(0, 3)];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:[UIColor redColor]
+                    range:NSMakeRange(4, 1)];
+    item1.attributedTitle = attrStr;
+    
     item1.cellHeight = 150;
-    item1.assistFieldText = @"这是默认的assistFieldText";
-    item1.assistFieldFont = [UIFont systemFontOfSize:13];
+    item1.assistLabelAttributedText = attrStr;
     item1.bottomLineX = 100;
     item1.operation = ^{
         NSLog(@"第一行");

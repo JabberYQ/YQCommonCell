@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 @property (nonatomic, copy) NSAttributedString *attributedTitle;
 /** 标题字体大小 默认16 */
 @property (nonatomic, strong) UIFont *titleLableFont;
-/** 标题颜色 默认MPBlueColor */
+/** 标题颜色 默认黑色 */
 @property (nonatomic, strong) UIColor *titleLableColor;
 
 /************************************ badge 对应属性 *************************************/

@@ -85,8 +85,11 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 @property (nonatomic, strong) UIFont *assistFieldFont;
 /** 辅助颜色 默认黑色*/
 @property (nonatomic, strong) UIColor *assistFieldColor;
+/** textField编辑时回调 */
+@property (nonatomic, copy) void (^assistFieldTextChangeBlock)(NSString *assistFieldText);
 /** textField编辑完成回调 */
 @property (nonatomic, copy) BOOL (^assistFieldDoneBlock)(NSString *assistFieldText);
+
 
 /************************ 辅助视图：imageView 对应属性 *************************************/
 /** 辅助图片本地Str */

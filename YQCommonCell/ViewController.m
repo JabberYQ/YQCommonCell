@@ -73,11 +73,11 @@
     };
     
     YQCommonItem *item3 = [YQCommonItem itemWithTitle:@"第三行第三行第三行" icon:@"2" arrow:YES hadBottomLine:YES];
-    UISwitch *s = [[UISwitch alloc] init];
-    s.frame = CGRectMake(0, 0, 100, 40);
-    item3.assistCustomView = s;
-    item3.assistCustomViewLayout = YQAssistCustomViewLayoutRight;
+    item3.assistFieldPlaceholderText = @"输入";
     item3.selectHighlight = NO;
+    item3.assistFieldTextChangeBlock = ^(NSString *assistFieldText) {
+        NSLog(@"%@", assistFieldText);
+    };
     item3.operation = ^{
         
     };

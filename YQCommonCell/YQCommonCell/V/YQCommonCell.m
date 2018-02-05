@@ -387,6 +387,13 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     }
 }
 
+
+- (void)assistTextFieldTextChange:(UITextField *)textField
+{
+    if (self.item.assistFieldTextChangeBlock) {
+        self.item.assistFieldTextChangeBlock(textField.text);
+    }
+}
 #pragma mark - setter
 - (void)setItem:(YQCommonItem *)item
 {
@@ -428,6 +435,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         _assistTextField.textAlignment = NSTextAlignmentRight;
         _assistTextField.returnKeyType = UIReturnKeyDone;
         _assistTextField.delegate = self;
+        [_assistTextField addTarget:self action:@selector(assistTextFieldTextChange:) forControlEvents:UIControlEventEditingChanged];
     }
     return _assistTextField;
 }

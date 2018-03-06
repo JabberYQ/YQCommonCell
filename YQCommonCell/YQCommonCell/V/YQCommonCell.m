@@ -8,13 +8,12 @@
 
 #import "YQCommonCell.h"
 #import "YQBadgeView.h"
-#import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 
 // 存在优先级问题
 /*
- 当item的辅助属性：assistLabelText、assistImageFileStr等属性同时设置的时候，显示的优先级为
- Custom >> Label >> Field >> ImageURL >> ImageFile >> Custom
+ 当item的辅助属性：同时设置的时候，显示的优先级为
+ Custom >> Label >> Field
  */
 typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 {
@@ -22,12 +21,10 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     YQCommonCellAssistTypeCustom = 1,
     YQCommonCellAssistTypeLabel = 2,
     YQCommonCellAssistTypeField = 3,
-    YQCommonCellAssistTypeImage = 4,
 };
 
 @interface YQCommonCell() <UITextFieldDelegate>
 @property (nonatomic, strong) UILabel *assistLabel; ///< 辅助信息lable
-@property (nonatomic, strong) UIImageView *assistImageView; ///< 辅助imageView
 @property (nonatomic, strong) UITextField *assistTextField; ///< 辅助UITextField
 @property (nonatomic, strong) UIView *assistCustomView; ///< 辅助自定义视图
 @property (nonatomic, strong) YQBadgeView *badgeView; ///< 提醒按钮
@@ -52,7 +49,6 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.assistCustomView];
-        [self.contentView addSubview:self.assistImageView];
         [self.contentView addSubview:self.assistLabel];
         [self.contentView addSubview:self.assistTextFile];
         [self.contentView addSubview:self.badgeView];
@@ -64,32 +60,38 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
-    CGFloat cellWidth = self.bounds.size.width;
-    CGFloat cellHeight = self.bounds.size.height;
+    
+    // 除了底部线条 所有的界面都与contentView相关
+    CGFloat cellWidth = self.contentView.bounds.size.width;
+    CGFloat cellHeight = self.contentView.bounds.size.height;
     CGFloat textLabelRight = CGRectGetMaxX(self.textLabel.frame);
     CGFloat badgeMargin = 10.f;
     CGFloat badgeWidth = 20.f;
-    CGFloat assistRightToCell = self.item.isArrow ? 40.f : 15.f;
-    CGFloat badgeRight = 0.f;
-    CGFloat assistImageWidth = self.item.assistImageWidth;
+    CGFloat assistViewRightToCell = self.item.arrow ? 5.f : 15.f;
+    CGFloat assistViewMaxLeft = 0.f;
     
     // 设置分割线
     if (!self.bottomLine.hidden) {
         CGFloat bottomLineX = self.item.bottomLineX < 0 ? self.textLabel.frame.origin.x : self.item.bottomLineX;
-        self.bottomLine.frame = CGRectMake(bottomLineX, cellHeight - self.item.bottomLineHeight, cellWidth - bottomLineX, self.item.bottomLineHeight);
+        self.bottomLine.frame = CGRectMake(bottomLineX, cellHeight - self.item.bottomLineHeight, self.bounds.size.width - bottomLineX, self.item.bottomLineHeight);
     }
     
     // 设置小红点
     if (!self.badgeView.hidden) {
-        self.badgeView.frame = CGRectMake(textLabelRight + badgeMargin, (cellHeight-badgeWidth)/2, badgeWidth, badgeWidth);
-        badgeRight = CGRectGetMaxX(self.badgeView.frame);
+        if (self.item.badgeLayout == YQBadgeViewLayoutLeft) { // 局左
+            self.badgeView.frame = CGRectMake(textLabelRight + badgeMargin, (cellHeight - badgeWidth)/2, badgeWidth, badgeWidth);
+            assistViewMaxLeft = CGRectGetMaxX(self.badgeView.frame);
+        } else { // 局右
+            self.badgeView.frame = CGRectMake(cellWidth - assistViewRightToCell - badgeWidth, (cellHeight - badgeWidth)/2, badgeWidth, badgeWidth);
+            assistViewMaxLeft = textLabelRight;
+            assistViewRightToCell = assistViewRightToCell + badgeWidth + badgeMargin;
+        }
     } else {
         self.badgeView.frame = CGRectZero;
-        badgeRight = textLabelRight;
+        assistViewMaxLeft = textLabelRight;
     }
     
-    CGFloat maxAssistWidth = cellWidth - badgeRight - assistRightToCell; // 最大的宽
+    CGFloat maxAssistWidth = cellWidth - assistViewMaxLeft - assistViewRightToCell; // 最大的宽
     
     /******************************* 辅助不部分 (需考虑优先级)******************************/
     switch (self.assistType) {
@@ -98,16 +100,14 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
             self.assistCustomView.frame = CGRectZero;
             self.assistLabel.frame = CGRectZero;
             self.assistTextField.frame = CGRectZero;
-            self.assistImageView.frame = CGRectZero;
             break;
         }
         case YQCommonCellAssistTypeCustom:
         {
-            self.assistCustomView.frame = CGRectMake(cellWidth - assistRightToCell - maxAssistWidth, 0, maxAssistWidth, self.bounds.size.height);
+            self.assistCustomView.frame = CGRectMake(cellWidth - assistViewRightToCell - maxAssistWidth, 0, maxAssistWidth, self.bounds.size.height);
             [self layoutCustomViewSubview];
             self.assistLabel.frame = CGRectZero;
             self.assistTextField.frame = CGRectZero;
-            self.assistImageView.frame = CGRectZero;
             break;
         }
         case YQCommonCellAssistTypeLabel:
@@ -117,25 +117,25 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
                                                               options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin
                                                            attributes:@{NSFontAttributeName:self.assistLabel.font}
                                                               context:nil].size;
-            self.assistLabel.frame = CGRectMake(cellWidth - assistRightToCell - size.width, 0, size.width, cellHeight);
+            if (self.item.assistLabelX <= 0) {
+                self.assistLabel.frame = CGRectMake(cellWidth - assistViewRightToCell - size.width, 0, size.width, cellHeight);
+            } else {
+                self.assistLabel.frame = CGRectMake(self.item.assistLabelX, 0, size.width, cellHeight);
+            }
             self.assistTextField.frame = CGRectZero;
-            self.assistImageView.frame = CGRectZero;
             break;
         }
         case YQCommonCellAssistTypeField:
         {
             self.assistCustomView.frame = CGRectZero;
             self.assistLabel.frame = CGRectZero;
-            self.assistTextFile.frame = CGRectMake(cellWidth - assistRightToCell - maxAssistWidth, 0, maxAssistWidth, self.bounds.size.height);
-            self.assistImageView.frame = CGRectZero;
-            break;
-        }
-        case YQCommonCellAssistTypeImage:
-        {
-            self.assistCustomView.frame = CGRectZero;
-            self.assistLabel.frame = CGRectZero;
-            self.assistTextField.frame = CGRectZero;
-            self.assistImageView.frame = CGRectMake(cellWidth - assistRightToCell - assistImageWidth, (cellHeight - assistImageWidth)/2, assistImageWidth, assistImageWidth);
+            if (self.item.assistFieldX <= 0) {
+                self.assistTextFile.frame = CGRectMake(cellWidth - assistViewRightToCell - maxAssistWidth, 0, maxAssistWidth, self.bounds.size.height);
+            } else {
+                CGFloat assistTextFileW = cellWidth - assistViewRightToCell - self.item.assistFieldX;
+                self.assistTextFile.frame = CGRectMake(self.item.assistFieldX, 0, assistTextFileW, self.bounds.size.height);
+            }
+            
             break;
         }
         default:
@@ -233,14 +233,14 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
             break;
     }
     
-    assistCustomView.clipsToBounds = self.item.isAssistCustomViewClipsToBounds;
+    assistCustomView.clipsToBounds = self.item.assistCustomViewClipsToBounds;
 }
 
 #pragma mark - settingInfo
 - (void)setCellResponse
 {
-    self.userInteractionEnabled = self.item.isSelectAbility;
-    if (self.item.isSelectHighlight == NO) {
+    self.userInteractionEnabled = self.item.selectAbility;
+    if (self.item.selectHighlight == NO) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     } else {
         self.selectionStyle = UITableViewCellSelectionStyleDefault;
@@ -250,6 +250,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 - (void)setCellStyle
 {
     self.contentView.backgroundColor = self.item.cellBackgroudColor;
+    self.backgroundColor = self.item.cellBackgroudColor;
     if (!self.item.attributedTitle) { // 设置标题
         self.textLabel.font = self.item.titleLableFont;
         self.textLabel.textColor = self.item.titleLableColor;
@@ -257,12 +258,23 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     self.bottomLine.backgroundColor = self.item.bottomLineColor;
     
     if (!self.item.assistLabelAttributedText) {
+        if (self.item.assistLabelX <= 0) {
+            self.assistLabel.textAlignment = NSTextAlignmentRight;
+        } else {
+            self.assistLabel.textAlignment = NSTextAlignmentLeft;
+        }
         self.assistLabel.font = self.item.assistLabelFont;
         self.assistLabel.textColor = self.item.assistLabelColor;
     }
     
     self.assistTextField.font = self.item.assistFieldFont;
     self.assistTextField.textColor = self.item.assistFieldColor;
+    self.assistTextField.keyboardType = self.item.assistFieldKeyboardType;
+    if (self.item.assistFieldX <= 0) {
+        self.assistTextField.textAlignment = NSTextAlignmentRight;
+    } else {
+        self.assistTextField.textAlignment = NSTextAlignmentLeft;
+    }
     
     if (self.item.iconWidth > 0) {
         UIImage *iconImage = self.imageView.image;
@@ -273,14 +285,6 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
-    
-    if (self.item.assistImageCornerRadius > 0) {
-        self.assistImageView.layer.cornerRadius = self.item.assistImageCornerRadius;
-        self.assistImageView.clipsToBounds = YES;
-    } else {
-        self.assistImageView.layer.cornerRadius = 0.f;
-        self.assistImageView.clipsToBounds = NO;
-    }
 }
 
 - (void)setCellData
@@ -289,6 +293,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     self.imageView.image = [UIImage imageNamed:self.item.icon];
     self.textLabel.text = nil;
     self.textLabel.attributedText = nil;
+    
     // textLabel
     if (self.item.attributedTitle) {
         self.textLabel.attributedText = self.item.attributedTitle;
@@ -296,7 +301,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         self.textLabel.text = self.item.title;
     }
     
-    if (self.item.isHadBottomLine) {
+    if (self.item.hadBottomLine) {
         self.bottomLine.hidden = NO;
     } else {
         self.bottomLine.hidden = YES;
@@ -311,7 +316,7 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     }
     
     // 设置跳转箭头
-    if (self.item.isArrow) {
+    if (self.item.arrow) {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
         self.accessoryType = UITableViewCellAccessoryNone;
@@ -347,31 +352,17 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     if ((self.item.assistFieldText && self.item.assistFieldText.length > 0) || (self.item.assistFieldPlaceholderText && self.item.assistFieldPlaceholderText.length > 0)) {
         self.assistTextField.hidden = NO;
         self.assistTextField.text = self.item.assistFieldText;
-        self.assistTextField.placeholder = self.item.assistFieldPlaceholderText;
+        // 判断是否设置了placeholder 的颜色
+        if (self.item.assistFieldPlaceholderColor) {
+            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:self.item.assistFieldPlaceholderText attributes:@{NSForegroundColorAttributeName:self.item.assistFieldPlaceholderColor}];
+            self.assistTextField.attributedPlaceholder = attrString;
+        } else {
+            self.assistTextField.placeholder = self.item.assistFieldPlaceholderText;
+        }
         self.assistType = YQCommonCellAssistTypeField;
         return;
     } else {
         self.assistTextField.hidden = YES;
-    }
-    
-    // 辅助图片 网络
-    if (self.item.assistImageURLStr && self.item.assistImageURLStr.length > 0) {
-        self.assistImageView.hidden = NO;
-        [self.assistImageView sd_setImageWithURL:[NSURL URLWithString:self.item.assistImageURLStr]];
-        self.assistType = YQCommonCellAssistTypeImage;
-        return;
-    } else {
-        self.assistImageView.hidden = YES;
-    }
-    
-    // 辅助图片 本地
-    if (self.item.assistImageFileStr && self.item.assistImageFileStr.length > 0) {
-        self.assistImageView.hidden = NO;
-        self.assistImageView.image = [UIImage imageNamed:self.item.assistImageFileStr];
-        self.assistType = YQCommonCellAssistTypeImage;
-        return;
-    } else {
-        self.assistImageView.hidden = YES;
     }
     
     self.assistType = YQCommonCellAssistTypeNone;
@@ -380,8 +371,8 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (self.item.assistFieldDoneBlock) {
-        return self.item.assistFieldDoneBlock(textField.text);
+    if (self.item.fieldEditFinishBlock) {
+        return self.item.fieldEditFinishBlock(textField.text);
     } else {
         return YES;
     }
@@ -390,8 +381,8 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
 
 - (void)assistTextFieldTextChange:(UITextField *)textField
 {
-    if (self.item.assistFieldTextChangeBlock) {
-        self.item.assistFieldTextChangeBlock(textField.text);
+    if (self.item.fieldTextChangeBlock) {
+        self.item.fieldTextChangeBlock(textField.text);
     }
 }
 #pragma mark - setter
@@ -412,19 +403,10 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
     if (_assistLabel == nil) {
         _assistLabel = [[UILabel alloc] init];
         _assistLabel.hidden = YES;
-        _assistLabel.textAlignment = NSTextAlignmentRight;
     }
     return _assistLabel;
 }
 
-- (UIImageView *)assistImageView
-{
-    if (_assistImageView == nil) {
-        _assistImageView = [[UIImageView alloc] init];
-        _assistImageView.hidden = YES;
-    }
-    return _assistImageView;
-}
 
 - (UITextField *)assistTextFile
 {
@@ -432,7 +414,6 @@ typedef NS_ENUM(NSInteger, YQCommonCellAssistType)
         _assistTextField = [[UITextField alloc] init];
         _assistTextField.hidden = YES;
         _assistTextField.borderStyle = UITextBorderStyleNone;
-        _assistTextField.textAlignment = NSTextAlignmentRight;
         _assistTextField.returnKeyType = UIReturnKeyDone;
         _assistTextField.delegate = self;
         [_assistTextField addTarget:self action:@selector(assistTextFieldTextChange:) forControlEvents:UIControlEventEditingChanged];

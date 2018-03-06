@@ -15,6 +15,28 @@
     UILabel *_footerLabel;
     BOOL _isLastItemHadBottomLine; // 暂存
 }
+
+
+
+YQPropSetFuncImplementation(YQCommonGroup, NSArray *, items);
+YQPropSetFuncImplementation(YQCommonGroup, BOOL, hiddenLastRowBottomLine);
+
+YQPropSetFuncImplementation(YQCommonGroup, CGFloat, headerHeight);
+YQPropSetFuncImplementation(YQCommonGroup, NSString *, headerTitle);
+YQPropSetFuncImplementation(YQCommonGroup, UIColor *, headerTitleColor);
+YQPropSetFuncImplementation(YQCommonGroup, UIFont *, headerTitleFont);
+YQPropSetFuncImplementation(YQCommonGroup, CGFloat, headerTitleHeight);
+YQPropSetFuncImplementation(YQCommonGroup, YQHeaderTitleLayout, headerTitleLayout);
+YQPropSetFuncImplementation(YQCommonGroup, UIView *, headerView);
+
+YQPropSetFuncImplementation(YQCommonGroup, CGFloat, footerHeight);
+YQPropSetFuncImplementation(YQCommonGroup, NSString *, footerTitle);
+YQPropSetFuncImplementation(YQCommonGroup, UIColor *, footerTitleColor);
+YQPropSetFuncImplementation(YQCommonGroup, UIFont *, footerTitleFont);
+YQPropSetFuncImplementation(YQCommonGroup, CGFloat, footerTitleHeight);
+YQPropSetFuncImplementation(YQCommonGroup, YQFooterTitleLayout, footerTitleLayout);
+YQPropSetFuncImplementation(YQCommonGroup, UIView *, footerView);
+
 + (instancetype)groupWithItems:(NSArray *)items
 {
     YQCommonGroup *group = [[YQCommonGroup alloc] init];
@@ -25,7 +47,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.headerHeight = 40.f;
+        self.headerHeight = 20.f;
         self.footerHeight = 0.01f;
         self.headerTitleFont = [UIFont systemFontOfSize:16];
         self.headerTitleColor = [UIColor grayColor];

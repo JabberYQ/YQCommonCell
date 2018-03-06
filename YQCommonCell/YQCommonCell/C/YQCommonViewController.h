@@ -11,5 +11,4 @@
 @interface YQCommonViewController : UIViewController
 @property (nonatomic, strong) UITableView *commonTableView;
 @property (nonatomic, strong) NSMutableArray *commonGroups;
-
 @end

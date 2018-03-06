@@ -9,26 +9,50 @@
 #import "YQCommonItem.h"
 
 @implementation YQCommonItem
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon
-{
-    return [self itemWithTitle:title icon:icon arrow:NO];
-}
+YQPropSetFuncImplementation(YQCommonItem, BOOL, selectAbility);
+YQPropSetFuncImplementation(YQCommonItem, BOOL, selectHighlight);
+YQPropSetFuncImplementation(YQCommonItem, CGFloat, cellHeight);
+YQPropSetFuncImplementation(YQCommonItem, Class, destVcClass);
+YQPropSetFuncImplementation(YQCommonItem, UIColor *, cellBackgroudColor);
+YQPropSetFuncImplementation(YQCommonItem, YQCommonCellSelectBlock, operation);
 
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow
-{
-    return [self itemWithTitle:title icon:icon arrow:arrow hadBottomLine:YES];
-}
+YQPropSetFuncImplementation(YQCommonItem, BOOL, arrow);
 
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow hadBottomLine:(BOOL)hadBottomLine
-{
-    YQCommonItem *item = [[YQCommonItem alloc] init];
-    /* 初始化数据 */
-    item.title = title;
-    item.icon = icon;
-    item.arrow = arrow;
-    item.hadBottomLine = hadBottomLine;
-    return item;
-}
+YQPropSetFuncImplementation(YQCommonItem, NSString *, icon);
+YQPropSetFuncImplementation(YQCommonItem, CGFloat, iconWidth);
+
+YQPropSetFuncImplementation(YQCommonItem, NSString *, title);
+YQPropSetFuncImplementation(YQCommonItem, UIFont *, titleLableFont);
+YQPropSetFuncImplementation(YQCommonItem, UIColor *, titleLableColor);
+YQPropSetFuncImplementation(YQCommonItem, NSAttributedString *, attributedTitle);
+
+YQPropSetFuncImplementation(YQCommonItem, NSString *, badgeValue);
+YQPropSetFuncImplementation(YQCommonItem, YQBadgeViewLayout, badgeLayout);
+
+YQPropSetFuncImplementation(YQCommonItem, NSString *, assistLabelText);
+YQPropSetFuncImplementation(YQCommonItem, UIFont *, assistLabelFont);
+YQPropSetFuncImplementation(YQCommonItem, UIColor *, assistLabelColor);
+YQPropSetFuncImplementation(YQCommonItem, NSAttributedString *, assistLabelAttributedText);
+YQPropSetFuncImplementation(YQCommonItem, CGFloat, assistLabelX);
+
+YQPropSetFuncImplementation(YQCommonItem, NSString *, assistFieldText);
+YQPropSetFuncImplementation(YQCommonItem, UIKeyboardType, assistFieldKeyboardType);
+YQPropSetFuncImplementation(YQCommonItem, UIFont *, assistFieldFont);
+YQPropSetFuncImplementation(YQCommonItem, UIColor *, assistFieldColor);
+YQPropSetFuncImplementation(YQCommonItem, NSString *, assistFieldPlaceholderText);
+YQPropSetFuncImplementation(YQCommonItem, UIColor *, assistFieldPlaceholderColor);
+YQPropSetFuncImplementation(YQCommonItem, CGFloat, assistFieldX);
+YQPropSetFuncImplementation(YQCommonItem, YQCommonFieldTextChangeBlock, fieldTextChangeBlock);
+YQPropSetFuncImplementation(YQCommonItem, YQCommonFieldEditFinishBlock, fieldEditFinishBlock);
+
+YQPropSetFuncImplementation(YQCommonItem, UIView *, assistCustomView);
+YQPropSetFuncImplementation(YQCommonItem, YQAssistCustomViewLayout, assistCustomViewLayout);
+YQPropSetFuncImplementation(YQCommonItem, BOOL, assistCustomViewClipsToBounds);
+
+YQPropSetFuncImplementation(YQCommonItem, BOOL, hadBottomLine);
+YQPropSetFuncImplementation(YQCommonItem, UIColor *, bottomLineColor);
+YQPropSetFuncImplementation(YQCommonItem, CGFloat, bottomLineHeight);
+YQPropSetFuncImplementation(YQCommonItem, CGFloat, bottomLineX);
 
 - (instancetype)init
 {
@@ -36,13 +60,16 @@
         /* 默认设置 */
         self.cellHeight = 44.f;
         self.cellBackgroudColor = [UIColor whiteColor];
-        self.titleLableFont = [UIFont boldSystemFontOfSize:16];
+        self.titleLableFont = [UIFont systemFontOfSize:16];
         self.titleLableColor = [UIColor blackColor];
+        self.badgeLayout = YQBadgeViewLayoutLeft;
         self.assistLabelFont = [UIFont systemFontOfSize:15];
         self.assistLabelColor = [UIColor blackColor];
+        self.assistLabelX = 0.f;
         self.assistFieldFont = [UIFont systemFontOfSize:15];
         self.assistFieldColor = [UIColor blackColor];
-        self.assistImageWidth = 30.f;
+        self.assistFieldKeyboardType = UIKeyboardTypeDefault;
+        self.assistFieldX = 0.f;
         self.selectAbility = YES;
         self.selectHighlight = YES;
         self.assistCustomViewLayout = YQAssistCustomViewLayoutRight;

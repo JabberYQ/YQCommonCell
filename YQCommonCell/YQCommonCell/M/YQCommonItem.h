@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "YQCommonMacro.h"
 
 typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
 {
@@ -22,132 +23,69 @@ typedef NS_ENUM(NSInteger, YQAssistCustomViewLayout)
     YQAssistCustomViewLayoutCenter = 8,
 };
 
+typedef NS_ENUM(NSInteger, YQBadgeViewLayout)
+{
+    YQBadgeViewLayoutLeft = 0,
+    YQBadgeViewLayoutRight = 1,
+};
+
+typedef void (^YQCommonCellSelectBlock) (void);
+typedef void (^YQCommonFieldTextChangeBlock) (NSString *text);
+typedef BOOL (^YQCommonFieldEditFinishBlock) (NSString *text);
+
 
 @interface YQCommonItem : NSObject
 
-/************************************ cell 对应属性 *************************************/
-/** cell能否被点击 默认YES */
-@property (nonatomic, assign, getter=isSelectAbility) BOOL selectAbility;
-/** cell被点击是否高亮 默认YES */
-@property (nonatomic, assign, getter=isSelectHighlight) BOOL selectHighlight;
-/** block 只能用 copy */
-@property (nonatomic, copy) void (^operation)(void);
-/** 点击这行cell需要跳转到哪个控制器 */
-@property (nonatomic, assign) Class destVcClass;
-/** cell行高 默认44 */
-@property (nonatomic, assign) CGFloat cellHeight;
-/** cell背景颜色 默认白色 */
-@property (nonatomic, strong) UIColor *cellBackgroudColor;
+// cell 对应属性
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, BOOL,                         selectAbility) ///< cell能否被点击 default YES.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, BOOL,                         selectHighlight) ///< cell被点击是否高亮 default YES.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, BOOL,                         arrow) ///< 是否有箭头 default NO.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, CGFloat,                      cellHeight) ///< cell的高度 default 44.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, Class,                        destVcClass) ///< 点击后的跳转控制器 default nil.
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIColor *,                    cellBackgroudColor) ///< cell背景颜色 default [UIColor whiteColor].
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, YQCommonCellSelectBlock,      operation) ///< 点击后的跳转控制器 default nil.
 
-/************************************ arrow 对应属性 *************************************/
-/** 是否有箭头 默认为NO */
-@property (nonatomic, assign, getter=isArrow) BOOL arrow;
+// icon 对应属性
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSString *,                   icon) ///< 图标 default nil.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, CGFloat,                      iconWidth) ///< 图标大小 default.
 
-/************************************ icon 对应属性 *************************************/
-/** 图标 */
-@property (nonatomic, copy) NSString *icon;
-/** 图标大小 默认系统大小 */
-@property (nonatomic, assign) CGFloat iconWidth;
+// title 对应属性
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSString *,                   title) ///< 标题 default nil.
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIFont *,                     titleLableFont) ///< 标题font default [UIFont systemFontOfSize:16].
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIColor *,                    titleLableColor) ///< 标题color default [UIFont BlackColor].
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSAttributedString *,         attributedTitle) ///< 标题 default nil.
 
-/************************************ title 对应属性 *************************************/
-/** 标题 */
-@property (nonatomic, copy) NSString *title;
-/** 标题 attributed 如果同时设置，就使用attributedTitle*/
-@property (nonatomic, copy) NSAttributedString *attributedTitle;
-/** 标题字体大小 默认16 */
-@property (nonatomic, strong) UIFont *titleLableFont;
-/** 标题颜色 默认黑色 */
-@property (nonatomic, strong) UIColor *titleLableColor;
-
-/************************************ badge 对应属性 *************************************/
-/** title右边 数字提醒标记 */
-@property (nonatomic, copy) NSString *badgeValue;
-
-/************************ 辅助视图：assistLabel 对应属性 *************************************/
-/** 辅助LabelText */
-@property (nonatomic, copy) NSString *assistLabelText;
-/** 辅助Label的attributedText 如果同时设置，就使用assistLabelAttributedText*/
-@property (nonatomic, copy) NSAttributedString *assistLabelAttributedText;
-/** 辅助字体大小 默认15 */
-@property (nonatomic, strong) UIFont *assistLabelFont;
-/** 辅助颜色 默认黑色*/
-@property (nonatomic, strong) UIColor *assistLabelColor;
+// badge 对应属性
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSString *,                   badgeValue) ///< 红点提醒 default nil.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, YQBadgeViewLayout,            badgeLayout) ///< 红点提醒布局 default YQBadgeViewLayoutLeft.
 
 
-/************************ 辅助视图：textField 对应属性 *************************************/
-/* assistFieldText 与 assistFieldPlaceholderText 的区别在于前者为field.text属性 后者为field.placeholder属性 */
+// 辅助视图assistLabel 对应属性   NSAttributedString > NSString
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSString *,                   assistLabelText) ///< 标题 default nil. lable.textAlignment = NSTextAlignmentRight;
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIFont *,                     assistLabelFont) ///< 标题font default [UIFont systemFontOfSize:15].
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIColor *,                    assistLabelColor) ///< 标题color default [UIFont BlackColor].
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSAttributedString *,         assistLabelAttributedText) ///< 标题 default nil.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, CGFloat,                      assistLabelX) ///< assistLabel X default 0. if>0 lable.textAlignment = NSTextAlignmentLeft;
 
-/** 辅助textField */
-@property (nonatomic, copy) NSString *assistFieldText;
-/** 辅助textField 的 placeholder */
-@property (nonatomic, copy) NSString *assistFieldPlaceholderText;
-/** 辅助字体大小 默认15 */
-@property (nonatomic, strong) UIFont *assistFieldFont;
-/** 辅助颜色 默认黑色*/
-@property (nonatomic, strong) UIColor *assistFieldColor;
-/** textField编辑时回调 */
-@property (nonatomic, copy) void (^assistFieldTextChangeBlock)(NSString *assistFieldText);
-/** textField编辑完成回调 */
-@property (nonatomic, copy) BOOL (^assistFieldDoneBlock)(NSString *assistFieldText);
+// 辅助视图textField 对应属性
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSString *,                   assistFieldText) ///< textField.text default nil. Field.textAlignment = NSTextAlignmentRight;
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, UIKeyboardType,               assistFieldKeyboardType) ///< textField.keyboardType
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIFont *,                     assistFieldFont) ///< textField.font [UIFont systemFontOfSize:15].
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIColor *,                    assistFieldColor) ///< textField.textColor default [UIFont BlackColor].
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, NSString *,                   assistFieldPlaceholderText) ///< textField.placeholder default nil.
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIColor *,                    assistFieldPlaceholderColor) ///< textField.placeholderTextColor
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, CGFloat,                      assistFieldX) ///< assistField X default 0. if>0 Field.textAlignment = NSTextAlignmentLeft;
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, YQCommonFieldTextChangeBlock, fieldTextChangeBlock)
+YQPropStatementAndFuncStatement(copy,    YQCommonItem, YQCommonFieldEditFinishBlock, fieldEditFinishBlock)
 
+// 辅助视图自定义customview 对应属性
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIView *,                     assistCustomView) ///< CustomView default nil.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, YQAssistCustomViewLayout,     assistCustomViewLayout) ///< CustomView Layout default YQAssistCustomViewLayoutRight
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, BOOL,                         assistCustomViewClipsToBounds) ///< CustomView ClipsToBounds default YES.
 
-/************************ 辅助视图：imageView 对应属性 *************************************/
-/** 辅助图片本地Str */
-@property (nonatomic, copy) NSString *assistImageFileStr;
-/** 辅助图片网络Str */
-@property (nonatomic, copy) NSString *assistImageURLStr;
-/** 辅助图像大小 默认30 */
-@property (nonatomic, assign) CGFloat assistImageWidth;
-/** 辅助图像圆角化 默认不处理 */
-@property (nonatomic, assign) CGFloat assistImageCornerRadius;
-
-/************************ 辅助视图：自定义customview 对应属性 *************************************/
-/** 辅助自定义视图 */
-@property (nonatomic, strong) UIView *assistCustomView;
-/** 辅助自定义视图的位置 默认靠右  */
-@property (nonatomic, assign) YQAssistCustomViewLayout assistCustomViewLayout;
-/** 辅助自定义视图 超过最大尺寸的部分 是否裁剪 默认裁剪 */
-@property (nonatomic, assign, getter=isAssistCustomViewClipsToBounds) BOOL assistCustomViewClipsToBounds;
-
-/************************************ 分割线 对应属性 *************************************/
-/** 是否有分割线 默认为YES */
-@property (nonatomic, assign, getter=isHadBottomLine) BOOL hadBottomLine;
-/** 分割线颜色 默认[UIColor colorWithWhite:0.85 alpha:0.6] */
-@property (nonatomic, strong) UIColor *bottomLineColor;
-/** 分割线高度  默认1*/
-@property (nonatomic, assign) CGFloat bottomLineHeight;
-/** 分割线X 默认和cell的textlabel平齐*/
-@property (nonatomic, assign) CGFloat bottomLineX;
-
-/**
- 初始化一个item
-
- @param title 标题
- @param icon 图标
- @return item
- */
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon;
-
-
-/**
- 初始化一个item
-
- @param title 标题
- @param icon 图标
- @param arrow 是否存在跳转箭头
- @return item
- */
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow;
-
-
-/**
- 初始化一个item
- 
- @param title 标题
- @param icon 图标
- @param arrow 是否存在跳转箭头
- @param hadBottomLine 是否有分割线
- @return item
- */
-+ (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon arrow:(BOOL)arrow hadBottomLine:(BOOL)hadBottomLine;
+// 分割线 对应属性
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, BOOL,                         hadBottomLine) ///< BottomLine default YES.
+YQPropStatementAndFuncStatement(strong,  YQCommonItem, UIColor *,                    bottomLineColor) ///< BottomLineColor default [UIColor colorWithWhite:0.85 alpha:0.6]
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, CGFloat,                      bottomLineHeight) ///< BottomLine default 1.0f.
+YQPropStatementAndFuncStatement(assign,  YQCommonItem, CGFloat,                      bottomLineX) ///< BottomLine default line.x = titlelabel.x
 @end

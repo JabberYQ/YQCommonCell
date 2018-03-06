@@ -91,7 +91,6 @@
     }
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     YQCommonGroup *group = self.commonGroups[section];
@@ -118,8 +117,16 @@
 }
 
 
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
 
-#pragma mark - setter
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
 - (NSMutableArray *)commonGroups
 {
     if (!_commonGroups) {

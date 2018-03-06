@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "YQCommonMacro.h"
 
 typedef NS_ENUM(NSInteger, YQHeaderTitleLayout)
 {
@@ -25,40 +26,25 @@ typedef NS_ENUM(NSInteger, YQFooterTitleLayout)
 
 
 @interface YQCommonGroup : NSObject
-/** 每个Section内部内容 */
-@property (nonatomic, strong) NSArray *items;
-/** Section最后一行row隐藏分割线 默认开启*/
-@property (nonatomic, assign) BOOL hiddenLastRowBottomLine;
+YQPropStatementAndFuncStatement(strong,  YQCommonGroup, NSArray *,           items)
+YQPropStatementAndFuncStatement(assign,  YQCommonGroup, BOOL,                hiddenLastRowBottomLine) ///< hidden last row bottomLine default YES.
 
-/** Section Header高 默认40 如果设置了Header标题或者HeaderView自定义，该属性无效，以试图的高为准*/
-@property (nonatomic, assign) CGFloat headerHeight;
-/** Section Header标题 */
-@property (nonatomic, copy) NSString *headerTitle;
-/** Section Header标题颜色 默认灰色*/
-@property (nonatomic, strong) UIColor *headerTitleColor;
-/** Section Header标题大小 默认16*/
-@property (nonatomic, strong) UIFont *headerTitleFont;
-/** Section Header标题高度 默认50*/
-@property (nonatomic, assign) CGFloat headerTitleHeight;
-/** Section Header标题位置 默认居左*/
-@property (nonatomic, assign) YQHeaderTitleLayout headerTitleLayout;
-/** Section HeaderView自定义 */
-@property (nonatomic, strong) UIView *headerView;
+YQPropStatementAndFuncStatement(assign,  YQCommonGroup, CGFloat,             headerHeight) ///< default 20.
+YQPropStatementAndFuncStatement(copy,    YQCommonGroup, NSString *,          headerTitle) ///< default nil.
+YQPropStatementAndFuncStatement(strong,  YQCommonGroup, UIColor *,           headerTitleColor) ///< default [UIColor grayColor].
+YQPropStatementAndFuncStatement(strong,  YQCommonGroup, UIFont *,           headerTitleFont) ///< default [UIFont systemFontOfSize:16].
+YQPropStatementAndFuncStatement(assign,  YQCommonGroup, CGFloat,             headerTitleHeight) ///< default 50.
+YQPropStatementAndFuncStatement(assign,  YQCommonGroup, YQHeaderTitleLayout, headerTitleLayout) ///< default YQHeaderTitleLayoutLeft.
+YQPropStatementAndFuncStatement(strong,  YQCommonGroup, UIView *,            headerView) ///< default nil.
 
-/** Section Footer高 默认0.01 如果设置了Footer标题或者FooterView自定义，该属性无效，以试图的高为准*/
-@property (nonatomic, assign) CGFloat footerHeight;
-/** Section Footer标题 */
-@property (nonatomic, copy) NSString *footerTitle;
-/** Section Footer标题颜色 默认灰色*/
-@property (nonatomic, strong) UIColor *footerTitleColor;
-/** Section Footer标题大小 默认16*/
-@property (nonatomic, strong) UIFont *footerTitleFont;
-/** Section Footer标题高度 默认50*/
-@property (nonatomic, assign) CGFloat footerTitleHeight;
-/** Section Footer标题位置 默认居左*/
-@property (nonatomic, assign) YQFooterTitleLayout footerTitleLayout;
-/** Section FooterView */
-@property (nonatomic, strong) UIView *footerView;
+
+YQPropStatementAndFuncStatement(assign,  YQCommonGroup, CGFloat,             footerHeight) ///< default 0.01.
+YQPropStatementAndFuncStatement(copy,    YQCommonGroup, NSString *,          footerTitle) ///< default nil.
+YQPropStatementAndFuncStatement(strong,  YQCommonGroup, UIColor *,           footerTitleColor) ///< default [UIColor grayColor].
+YQPropStatementAndFuncStatement(strong,  YQCommonGroup, UIFont *,           footerTitleFont) ///< default [UIFont systemFontOfSize:16].
+YQPropStatementAndFuncStatement(assign,  YQCommonGroup, CGFloat,             footerTitleHeight) ///< default 50.
+YQPropStatementAndFuncStatement(assign,  YQCommonGroup, YQFooterTitleLayout, footerTitleLayout) ///< default YQFooterTitleLayoutLeft.
+YQPropStatementAndFuncStatement(strong,  YQCommonGroup, UIView *,            footerView) ///< default nil.
 
 + (instancetype)groupWithItems:(NSArray *)items;
 @end

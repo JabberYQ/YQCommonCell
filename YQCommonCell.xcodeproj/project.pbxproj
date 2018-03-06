@@ -18,13 +18,13 @@
 		F33C59D01FD7DF4900F00BE5 /* YQCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F33C59BE1FD7DF4900F00BE5 /* YQCommonCell.m */; };
 		F33C59D61FDA215D00F00BE5 /* YQ_image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F33C59D51FDA215D00F00BE5 /* YQ_image.xcassets */; };
 		F33C59D91FDA219100F00BE5 /* YQCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F33C59D81FDA219100F00BE5 /* YQCommonViewController.m */; };
-		F35033892048FA3D0053535E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35033882048FA3D0053535E /* MainViewController.m */; };
-		F350338C204CD12A0053535E /* TitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F350338B204CD12A0053535E /* TitleViewController.m */; };
-		F350338F204CD80A0053535E /* AssistLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F350338E204CD80A0053535E /* AssistLabelViewController.m */; };
-		F3503392204CDA130053535E /* AssistFeildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3503391204CDA130053535E /* AssistFeildViewController.m */; };
-		F3503395204CE39F0053535E /* AssistViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3503394204CE39F0053535E /* AssistViewViewController.m */; };
-		F3503398204CF0D00053535E /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3503397204CF0D00053535E /* OtherViewController.m */; };
-		F350339B204D153E0053535E /* IconAndBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F350339A204D153E0053535E /* IconAndBadgeViewController.m */; };
+		F35033AB204E1BEA0053535E /* AssistFeildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F350339E204E1BEA0053535E /* AssistFeildViewController.m */; };
+		F35033AC204E1BEA0053535E /* AssistLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35033A0204E1BEA0053535E /* AssistLabelViewController.m */; };
+		F35033AD204E1BEA0053535E /* AssistViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35033A2204E1BEA0053535E /* AssistViewViewController.m */; };
+		F35033AE204E1BEA0053535E /* IconAndBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35033A4204E1BEA0053535E /* IconAndBadgeViewController.m */; };
+		F35033AF204E1BEA0053535E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35033A6204E1BEA0053535E /* MainViewController.m */; };
+		F35033B0204E1BEA0053535E /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35033A8204E1BEA0053535E /* OtherViewController.m */; };
+		F35033B1204E1BEA0053535E /* TitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35033AA204E1BEA0053535E /* TitleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,20 +49,20 @@
 		F33C59D81FDA219100F00BE5 /* YQCommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YQCommonViewController.m; sourceTree = "<group>"; };
 		F35033842048D7CA0053535E /* YQCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YQCommon.h; sourceTree = "<group>"; };
 		F35033862048D8CC0053535E /* YQCommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YQCommonMacro.h; sourceTree = "<group>"; };
-		F35033872048FA3D0053535E /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		F35033882048FA3D0053535E /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		F350338A204CD12A0053535E /* TitleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleViewController.h; sourceTree = "<group>"; };
-		F350338B204CD12A0053535E /* TitleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleViewController.m; sourceTree = "<group>"; };
-		F350338D204CD80A0053535E /* AssistLabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssistLabelViewController.h; sourceTree = "<group>"; };
-		F350338E204CD80A0053535E /* AssistLabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssistLabelViewController.m; sourceTree = "<group>"; };
-		F3503390204CDA130053535E /* AssistFeildViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssistFeildViewController.h; sourceTree = "<group>"; };
-		F3503391204CDA130053535E /* AssistFeildViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssistFeildViewController.m; sourceTree = "<group>"; };
-		F3503393204CE39F0053535E /* AssistViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssistViewViewController.h; sourceTree = "<group>"; };
-		F3503394204CE39F0053535E /* AssistViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssistViewViewController.m; sourceTree = "<group>"; };
-		F3503396204CF0D00053535E /* OtherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherViewController.h; sourceTree = "<group>"; };
-		F3503397204CF0D00053535E /* OtherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherViewController.m; sourceTree = "<group>"; };
-		F3503399204D153E0053535E /* IconAndBadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconAndBadgeViewController.h; sourceTree = "<group>"; };
-		F350339A204D153E0053535E /* IconAndBadgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IconAndBadgeViewController.m; sourceTree = "<group>"; };
+		F350339D204E1BEA0053535E /* AssistFeildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssistFeildViewController.h; sourceTree = "<group>"; };
+		F350339E204E1BEA0053535E /* AssistFeildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssistFeildViewController.m; sourceTree = "<group>"; };
+		F350339F204E1BEA0053535E /* AssistLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssistLabelViewController.h; sourceTree = "<group>"; };
+		F35033A0204E1BEA0053535E /* AssistLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssistLabelViewController.m; sourceTree = "<group>"; };
+		F35033A1204E1BEA0053535E /* AssistViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssistViewViewController.h; sourceTree = "<group>"; };
+		F35033A2204E1BEA0053535E /* AssistViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssistViewViewController.m; sourceTree = "<group>"; };
+		F35033A3204E1BEA0053535E /* IconAndBadgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconAndBadgeViewController.h; sourceTree = "<group>"; };
+		F35033A4204E1BEA0053535E /* IconAndBadgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconAndBadgeViewController.m; sourceTree = "<group>"; };
+		F35033A5204E1BEA0053535E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F35033A6204E1BEA0053535E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		F35033A7204E1BEA0053535E /* OtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherViewController.h; sourceTree = "<group>"; };
+		F35033A8204E1BEA0053535E /* OtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherViewController.m; sourceTree = "<group>"; };
+		F35033A9204E1BEA0053535E /* TitleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleViewController.h; sourceTree = "<group>"; };
+		F35033AA204E1BEA0053535E /* TitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,20 +97,7 @@
 			children = (
 				F33C59641FD7DF3700F00BE5 /* AppDelegate.h */,
 				F33C59651FD7DF3700F00BE5 /* AppDelegate.m */,
-				F35033872048FA3D0053535E /* MainViewController.h */,
-				F35033882048FA3D0053535E /* MainViewController.m */,
-				F350338A204CD12A0053535E /* TitleViewController.h */,
-				F350338B204CD12A0053535E /* TitleViewController.m */,
-				F3503399204D153E0053535E /* IconAndBadgeViewController.h */,
-				F350339A204D153E0053535E /* IconAndBadgeViewController.m */,
-				F350338D204CD80A0053535E /* AssistLabelViewController.h */,
-				F350338E204CD80A0053535E /* AssistLabelViewController.m */,
-				F3503390204CDA130053535E /* AssistFeildViewController.h */,
-				F3503391204CDA130053535E /* AssistFeildViewController.m */,
-				F3503393204CE39F0053535E /* AssistViewViewController.h */,
-				F3503394204CE39F0053535E /* AssistViewViewController.m */,
-				F3503396204CF0D00053535E /* OtherViewController.h */,
-				F3503397204CF0D00053535E /* OtherViewController.m */,
+				F350339C204E1BEA0053535E /* Demo */,
 				F33C59B41FD7DF4900F00BE5 /* YQCommonCell */,
 				F33C596A1FD7DF3700F00BE5 /* Main.storyboard */,
 				F33C596D1FD7DF3700F00BE5 /* Assets.xcassets */,
@@ -179,6 +166,27 @@
 				F35033862048D8CC0053535E /* YQCommonMacro.h */,
 			);
 			path = O;
+			sourceTree = "<group>";
+		};
+		F350339C204E1BEA0053535E /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				F35033A5204E1BEA0053535E /* MainViewController.h */,
+				F35033A6204E1BEA0053535E /* MainViewController.m */,
+				F350339D204E1BEA0053535E /* AssistFeildViewController.h */,
+				F350339E204E1BEA0053535E /* AssistFeildViewController.m */,
+				F350339F204E1BEA0053535E /* AssistLabelViewController.h */,
+				F35033A0204E1BEA0053535E /* AssistLabelViewController.m */,
+				F35033A1204E1BEA0053535E /* AssistViewViewController.h */,
+				F35033A2204E1BEA0053535E /* AssistViewViewController.m */,
+				F35033A3204E1BEA0053535E /* IconAndBadgeViewController.h */,
+				F35033A4204E1BEA0053535E /* IconAndBadgeViewController.m */,
+				F35033A7204E1BEA0053535E /* OtherViewController.h */,
+				F35033A8204E1BEA0053535E /* OtherViewController.m */,
+				F35033A9204E1BEA0053535E /* TitleViewController.h */,
+				F35033AA204E1BEA0053535E /* TitleViewController.m */,
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,18 +261,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3503398204CF0D00053535E /* OtherViewController.m in Sources */,
+				F35033AB204E1BEA0053535E /* AssistFeildViewController.m in Sources */,
 				F33C59CF1FD7DF4900F00BE5 /* YQBadgeView.m in Sources */,
-				F350338F204CD80A0053535E /* AssistLabelViewController.m in Sources */,
 				F33C59CD1FD7DF4900F00BE5 /* YQCommonGroup.m in Sources */,
 				F33C59CE1FD7DF4900F00BE5 /* YQCommonItem.m in Sources */,
+				F35033AC204E1BEA0053535E /* AssistLabelViewController.m in Sources */,
+				F35033AE204E1BEA0053535E /* IconAndBadgeViewController.m in Sources */,
+				F35033B0204E1BEA0053535E /* OtherViewController.m in Sources */,
+				F35033B1204E1BEA0053535E /* TitleViewController.m in Sources */,
 				F33C59741FD7DF3700F00BE5 /* main.m in Sources */,
-				F350338C204CD12A0053535E /* TitleViewController.m in Sources */,
-				F350339B204D153E0053535E /* IconAndBadgeViewController.m in Sources */,
+				F35033AF204E1BEA0053535E /* MainViewController.m in Sources */,
+				F35033AD204E1BEA0053535E /* AssistViewViewController.m in Sources */,
 				F33C59D01FD7DF4900F00BE5 /* YQCommonCell.m in Sources */,
-				F3503392204CDA130053535E /* AssistFeildViewController.m in Sources */,
-				F3503395204CE39F0053535E /* AssistViewViewController.m in Sources */,
-				F35033892048FA3D0053535E /* MainViewController.m in Sources */,
 				F33C59661FD7DF3700F00BE5 /* AppDelegate.m in Sources */,
 				F33C59D91FDA219100F00BE5 /* YQCommonViewController.m in Sources */,
 			);

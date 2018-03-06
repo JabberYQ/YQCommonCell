@@ -48,7 +48,7 @@
         
         // 设置header
         UIView *headerView = ({
-            UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200)];
+            UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 220)];
             headerView.numberOfLines = 0;
             headerView.textColor = [UIColor lightGrayColor];
             headerView.font = [UIFont systemFontOfSize:14];
